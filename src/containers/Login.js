@@ -12,13 +12,25 @@ export default function Login() {
     }
 
     function handleSubmit(event) {
-        event.preventDefault();
-        console.log(email, password)
+        var query = `query{users{id}}`;
+        const requestOptions = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+              },
+            mode: 'no-cors',
+            body: JSON.stringify({query})
+        };
+
+        fetch('http://localhost:8080/', requestOptions)
+        .then(res => res.json())
+        .then(json => console.log(json))
+        .catch(console.error);
     }
 
     return (
         <div className="Login">
-            <Form onSubmit={handleSubmit}>
+            <Form onSubmit={handleSubmit()}>
                 <Form.Group controlId="formBasicEmail">
                     <Form.Label>Email address</Form.Label>
                     <Form.Control 
