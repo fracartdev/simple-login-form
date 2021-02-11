@@ -7,7 +7,6 @@ export default function Home() {
 
   useEffect(() => {
     renderPosts();
-    
   }, []);
 
   async function fetchPosts() {
@@ -50,21 +49,27 @@ export default function Home() {
 
   async function renderPosts() {
     const data = await fetchPosts();
-    setPosts(data);
+    let items = [];
+    for (let index = 0; index < data.data.posts.data.length; index++) {
+      items.push(
+        <Card style={{ width: '18rem' }}>
+          <Card.Body>
+            <Card.Title>{data.data.posts.data[index].title}</Card.Title>
+            <Card.Text>
+              {data.data.posts.data[index].body}
+            </Card.Text>
+          </Card.Body>
+        </Card>        
+      )
+    }
+
+    setPosts(items);
   }
 
   return (
-    console.log(posts.data.posts.data[1].title),
     <Container>
       <Row>
-        <Card style={{ width: '18rem' }}>
-          <Card.Body>
-            <Card.Title>{posts.data.posts.data[1].title}</Card.Title>
-            <Card.Text>
-              {posts.data.posts.data[1].body}
-            </Card.Text>
-          </Card.Body>
-        </Card>
+        {posts}
       </Row>
     </Container>
   );
