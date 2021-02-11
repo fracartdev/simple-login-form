@@ -4,9 +4,11 @@ import Home from "./containers/Home";
 import NotFound from "./containers/NotFound";
 import Login from "./containers/Login";
 import Signup from "./containers/Signup";
+import { AuthProvider } from "./context";
 
 export default function Routes() {
   return (
+    <AuthProvider>
     <Switch>
       <Route exact path="/">
         <Home />
@@ -21,5 +23,6 @@ export default function Routes() {
         <NotFound />
       </Route>
     </Switch>
+    </AuthProvider>
   );
 }

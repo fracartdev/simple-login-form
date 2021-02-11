@@ -8,6 +8,9 @@ export default function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
+    const dispatch = useAuthDispatch()
+    const { loading, errorMessage } = useAuthState()
+
     function validateForm() {
         return email.length > 0 && password.length > 0;
     }
@@ -30,11 +33,10 @@ export default function Login() {
 
     const handleLogin = async (e) => {
         e.preventDefault()
-        let payload = {name, email}
         try {
-            let response = await loginUser(dispatch, payload) //loginUser action makes the request and handles all the neccessary state changes
+            let response = await loginUser(dispatch, {email, password}) //loginUser action makes the request and handles all the neccessary state changes
             if (!response.user) return
-            props.history.push('/') //navigate to dashboard on success
+            console.log(response.user);
         } catch (error) {
             console.log(error)
         }
