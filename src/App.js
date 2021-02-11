@@ -4,6 +4,7 @@ import "./App.css";
 import Routes from "./Routes";
 import Nav from "react-bootstrap/Nav";
 import { LinkContainer } from "react-router-bootstrap";
+import { AuthProvider } from "./context";
 
 function App() {
   return (
@@ -26,7 +27,6 @@ function App() {
           </Nav>
         </Navbar.Collapse>
       </Navbar>
-      <Routes />
     </div>
   );
 }

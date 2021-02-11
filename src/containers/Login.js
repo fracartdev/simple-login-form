@@ -2,6 +2,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import "./Login.css";
 import React, { useState } from "react";
+import { loginUser, useAuthState, useAuthDispatch } from "../context";
 
 export default function Login() {
     const [email, setEmail] = useState("");
@@ -27,9 +28,21 @@ export default function Login() {
         }).then(res => res.json()).then(console.log)
     }
 
+    const handleLogin = async (e) => {
+        e.preventDefault()
+        let payload = {name, email}
+        try {
+            let response = await loginUser(dispatch, payload) //loginUser action makes the request and handles all the neccessary state changes
+            if (!response.user) return
+            props.history.push('/') //navigate to dashboard on success
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     return (
         <div className="Login">
-            <Form onSubmit={handleSubmit}>
+            <Form onSubmit={handleLogin}>
                 <Form.Group controlId="formBasicEmail">
                     <Form.Label>Email address</Form.Label>
                     <Form.Control 
