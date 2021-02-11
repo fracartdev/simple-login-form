@@ -13,7 +13,18 @@ export default function Login() {
 
     function handleSubmit(event) {
         event.preventDefault();
-        console.log(email);
+        fetch("https://graphqlzero.almansi.me/api", {
+            "method": "POST",
+            "headers": { "content-type": "application/json" },
+            "body": JSON.stringify({
+                query: `{
+                    user(id: 1) {
+                        id
+                        name
+                    }
+                }`
+            })
+        }).then(res => res.json()).then(console.log)
     }
 
     return (
