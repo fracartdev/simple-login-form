@@ -1,25 +1,30 @@
-import Form from 'react-bootstrap/Form';
+import { Form } from "react-bootstrap";
 import Button from 'react-bootstrap/Button';
-import "./Login.css";
+import "./Signup.css";
 import React, { useState } from "react";
 
-export default function Login() {
-    const [email, setEmail] = useState("");
+export default function Signup() {
+    const [email, setEmail] = useState("")
     const [password, setPassword] = useState("");
+    const [c_password, setConfPassword] = useState("");
 
     function validateForm() {
-        return email.length > 0 && password.length > 0;
+        return email.length > 0 && password.length > 0 && vPassword();
+    }
+
+    function vPassword() {
+        return (password == c_password);
     }
 
     function handleSubmit(event) {
         event.preventDefault();
-        console.log(email);
+        console.log(email, password, c_password);
     }
 
     return (
-        <div className="Login">
+        <div className="Signup">
             <Form onSubmit={handleSubmit}>
-                <Form.Group controlId="formBasicEmail">
+                <Form.Group controlId="formSignupEmail">
                     <Form.Label>Email address</Form.Label>
                     <Form.Control 
                         type="email" 
@@ -28,18 +33,27 @@ export default function Login() {
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                     />
-                    <Form.Text className="text-muted">
-                    We'll never share your email with anyone else.
-                    </Form.Text>
+
                 </Form.Group>
 
-                <Form.Group controlId="formBasicPassword">
+                <Form.Group controlId="formSignupPassword">
                     <Form.Label>Password</Form.Label>
                     <Form.Control 
                         type="password" 
                         placeholder="Password" 
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
+                    />
+                    <Form.Text className="text-muted">
+                        Password must be at least 8 characters long.
+                    </Form.Text>
+
+                    <Form.Label>Confirm Password</Form.Label>
+                    <Form.Control 
+                        type="password" 
+                        placeholder="Password" 
+                        value={c_password}
+                        onChange={(e) => setConfPassword(e.target.value)}
                     />
                 </Form.Group>
                 <Button block size="lg" type="submit" disabled={!validateForm()}>
