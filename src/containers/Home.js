@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Container, Row, Card } from "react-bootstrap";
+import { Container, Row, Card, CardDeck } from "react-bootstrap";
 import "./Home.css";
 
 export default function Home() {
@@ -52,7 +52,7 @@ export default function Home() {
     let items = [];
     for (let index = 0; index < data.data.posts.data.length; index++) {
       items.push(
-        <Card style={{ width: '18rem' }}>
+        <Card style={{ width: '12rem' }}>
           <Card.Body>
             <Card.Title>{data.data.posts.data[index].title}</Card.Title>
             <Card.Text>
@@ -69,7 +69,7 @@ export default function Home() {
   return (
     <Container>
       <Row>
-        {posts}
+          {posts}
       </Row>
     </Container>
   );
